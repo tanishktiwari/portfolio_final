@@ -1,8 +1,14 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { Github, ExternalLink, Terminal, ArrowRight, Contact } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import {
+  Github,
+  ExternalLink,
+  Terminal,
+  ArrowRight,
+  Contact,
+} from "lucide-react";
 
 const CircuitLoader = () => {
   return (
@@ -46,42 +52,53 @@ export default function Projects() {
 
   const handleNavigation = async (path) => {
     setButtonLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     window.location.href = path;
   };
 
   const projects = [
     {
-      title: "E-commerce Platform",
-      description: "Full-stack e-commerce solution built with MERN stack featuring real-time inventory and payment processing",
-      tech: ["React", "Node.js", "MongoDB", "Express"],
+      title: "Support Ticket Management System",
+      description:
+        "Web application with user login, personalized panels, and role-based access for efficient support ticket management.",
+      tech: [
+        "React",
+        "Node.js",
+        "MongoDB",
+        "Express",
+        "TailWindcss",
+        "API Integration",
+        "Real Time Notification",
+      ],
       github: "#",
-      demo: "#",
-      image: "/api/placeholder/400/300"
+      demo: "https://console.deskassure.com",
+      image: "./deskAssure.jpg",
     },
     {
       title: "Social Network App",
-      description: "Feature-rich social platform with real-time messaging and content sharing",
+      description:
+        "Feature-rich social platform with real-time messaging and content sharing",
       tech: ["React", "Socket.io", "Node.js", "Redis"],
       github: "#",
       demo: "#",
-      image: "/api/placeholder/400/300"
+      image: "/api/placeholder/400/300",
     },
     {
       title: "Project Management Tool",
-      description: "Collaborative project management system with real-time updates",
+      description:
+        "Collaborative project management system with real-time updates",
       tech: ["React", "GraphQL", "Node.js", "MongoDB"],
       github: "#",
       demo: "#",
-      image: "/api/placeholder/400/300"
-    }
+      image: "/api/placeholder/400/300",
+    },
   ];
 
   return (
     <div className="min-h-screen bg-black pt-16">
       {loading && <CircuitLoader />}
       {buttonLoading && <CircuitLoader />}
-      
+
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="flex justify-between items-center mb-12">
           <h1 className="text-4xl font-bold text-green-500 font-mono flex items-center">
@@ -89,7 +106,7 @@ export default function Projects() {
             <span className="animate-pulse">PROJECTS_</span>
           </h1>
           <button
-            onClick={() => handleNavigation('/contact')}
+            onClick={() => handleNavigation("/contact")}
             className="group flex items-center space-x-2 bg-green-500 hover:bg-green-400 text-black px-6 py-3 rounded-full transform transition-all duration-300 hover:scale-105"
           >
             <Contact className="w-5 h-5" />
@@ -100,8 +117,8 @@ export default function Projects() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className="bg-gray-900 border border-green-500 rounded-lg overflow-hidden
                        transform transition-all duration-300 hover:scale-105 hover:border-green-400
                        hover:shadow-lg hover:shadow-green-500/50"
@@ -112,12 +129,14 @@ export default function Projects() {
                 className="w-full h-48 object-cover opacity-80 hover:opacity-100 transition-opacity"
               />
               <div className="p-6">
-                <h2 className="text-xl font-semibold mb-2 text-green-400">{project.title}</h2>
+                <h2 className="text-xl font-semibold mb-2 text-green-400">
+                  {project.title}
+                </h2>
                 <p className="text-gray-400 mb-4">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech, i) => (
-                    <span 
-                      key={i} 
+                    <span
+                      key={i}
                       className="px-3 py-1 bg-green-900/30 border border-green-500 rounded-full text-sm text-green-400"
                     >
                       {tech}
@@ -137,16 +156,20 @@ export default function Projects() {
                     <Github className="w-5 h-5 mr-1" /> Code
                   </Link>
                   <Link
-                    href={project.demo}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setButtonLoading(true);
-                      setTimeout(() => setButtonLoading(false), 1000);
-                    }}
-                    className="flex items-center text-green-400 hover:text-green-300 transition-colors"
-                  >
-                    <ExternalLink className="w-5 h-5 mr-1" /> Demo
-                  </Link>
+  href={project.demo}
+  onClick={(e) => {
+    e.preventDefault(); // Prevent the default navigation behavior
+    setButtonLoading(true); // Show loading state
+    setTimeout(() => {
+      setButtonLoading(false); // Hide loading state after 1 second
+      window.open(project.demo, '_blank'); // Open the demo link in a new tab
+    }, 1000);
+  }}
+  className="flex items-center text-green-400 hover:text-green-300 transition-colors"
+>
+  <ExternalLink className="w-5 h-5 mr-1" /> Demo
+</Link>
+
                 </div>
               </div>
             </div>
