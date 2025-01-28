@@ -1,0 +1,298 @@
+"use client"
+
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { Github, ExternalLink, Terminal, Shield, Cpu, ArrowRight, Loader2 } from 'lucide-react';
+
+const ButtonLoader = () => (
+  <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center">
+    <div className="text-green-500 flex flex-col items-center">
+      <Loader2 className="w-12 h-12 animate-spin" />
+      <p className="mt-4 font-mono">Processing Request...</p>
+    </div>
+  </div>
+);
+
+const MatrixBackground = () => {
+  return (
+    <div className="fixed inset-0 bg-black opacity-20 pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden matrix-animation" />
+    </div>
+  );
+};
+
+const GlitchText = ({ children, className = "" }) => {
+  return (
+    <div className={`relative inline-block ${className}`}>
+      <span className="glitch-text">{children}</span>
+      <span className="glitch-text-alt" aria-hidden="true">{children}</span>
+      <span className="glitch-text-alt2" aria-hidden="true">{children}</span>
+    </div>
+  );
+};
+
+const HackerLoader = () => {
+  const [progress, setProgress] = useState(0);
+  const [status, setStatus] = useState('Initializing...');
+
+  useEffect(() => {
+    const messages = [
+      'Loading MERN modules...',
+      'Connecting to MongoDB...',
+      'Starting Express server...',
+      'Rendering React components...'
+    ];
+
+    let currentIndex = 0;
+    const interval = setInterval(() => {
+      if (progress < 100) {
+        setProgress(prev => prev + 2);
+        if (progress % 25 === 0 && currentIndex < messages.length) {
+          setStatus(messages[currentIndex]);
+          currentIndex++;
+        }
+      } else {
+        clearInterval(interval);
+      }
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [progress]);
+
+  return (
+    <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+      <div className="text-green-500 font-mono w-80">
+        <Terminal className="w-12 h-12 mb-4 mx-auto animate-pulse" />
+        <div className="mb-4">{status}</div>
+        <div className="h-2 bg-gray-800 rounded">
+          <div 
+            className="h-full bg-green-500 rounded transition-all duration-100"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+        <div className="mt-2 text-right">{progress}%</div>
+      </div>
+    </div>
+  );
+};
+
+export default function Projects() {
+  const [loading, setLoading] = useState(true);
+  const [buttonLoading, setButtonLoading] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleButtonClick = async (e) => {
+    e.preventDefault();
+    setButtonLoading(true);
+    // Simulate loading for 1 second before navigation
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    window.location.href = '/projects';
+  };
+
+  const projects = [
+    {
+      title: "E-commerce Platform",
+      description: "Fully responsive e-commerce platform with real-time inventory management",
+      tech: ["MongoDB", "Express.js", "React", "Node.js", "Redux"],
+      github: "#",
+      demo: "#",
+      image: "/api/placeholder/400/300"
+    },
+    {
+      title: "Social Media Dashboard",
+      description: "Real-time analytics dashboard for social media management",
+      tech: ["React", "Socket.io", "Node.js", "MongoDB", "AWS"],
+      github: "#",
+      demo: "#",
+      image: "/api/placeholder/400/300"
+    },
+    {
+      title: "Task Management System",
+      description: "Enterprise task management system with real-time collaboration",
+      tech: ["MERN Stack", "GraphQL", "JWT", "Docker"],
+      github: "#",
+      demo: "#",
+      image: "/api/placeholder/400/300"
+    }
+  ];
+
+  const experience = [
+    {
+      company: "Foxnet Securitas Private Limited",
+      role: "Senior MERN Stack Developer",
+      period: "2022 - Present",
+      description: "Leading development of enterprise applications using MERN stack. Implementing microservices architecture and real-time features. Mentoring junior developers and establishing best practices.",
+      technologies: ["MongoDB", "Express.js", "React", "Node.js", "AWS", "Docker"]
+    },
+    {
+      company: "e2e Research",
+      role: "Full Stack Developer",
+      period: "2020 - 2022",
+      description: "Developed scalable web applications using MERN stack. Implemented CI/CD pipelines and automated testing. Collaborated with cross-functional teams to deliver high-quality solutions.",
+      technologies: ["MERN Stack", "Redux", "Jest", "Jenkins", "TypeScript"]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-black text-green-500 font-mono pt-16">
+      {loading && <HackerLoader />}
+      {buttonLoading && <ButtonLoader />}
+      <MatrixBackground />
+      
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
+        <div className="flex items-center mb-12">
+          <Shield className="w-8 h-8 mr-4 animate-pulse" />
+          <GlitchText className="text-4xl font-bold">MERN PROJECTS</GlitchText>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          {projects.map((project, index) => (
+            <div key={index} 
+                 className="bg-gray-900 border border-green-500 rounded-lg overflow-hidden 
+                          transform transition-all duration-300 hover:scale-105 hover:border-green-400
+                          hover:shadow-lg hover:shadow-green-500/50">
+              <div className="p-6">
+                <h2 className="text-xl font-semibold mb-2 text-green-400">{project.title}</h2>
+                <p className="text-gray-400 mb-4">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tech.map((tech, i) => (
+                    <span key={i} className="px-3 py-1 bg-green-900/30 border border-green-500 rounded-full text-sm">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex space-x-4">
+                  <Link
+                    href={project.github}
+                    className="flex items-center text-green-400 hover:text-green-300 transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setButtonLoading(true);
+                      setTimeout(() => setButtonLoading(false), 1000);
+                    }}
+                  >
+                    <Github className="w-5 h-5 mr-1" /> Source
+                  </Link>
+                  <Link
+                    href={project.demo}
+                    className="flex items-center text-green-400 hover:text-green-300 transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setButtonLoading(true);
+                      setTimeout(() => setButtonLoading(false), 1000);
+                    }}
+                  >
+                    <ExternalLink className="w-5 h-5 mr-1" /> Demo
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mb-12">
+          <div className="flex items-center mb-8">
+            <Cpu className="w-8 h-8 mr-4 animate-pulse" />
+            <GlitchText className="text-3xl font-bold">WORK EXPERIENCE</GlitchText>
+          </div>
+          <div className="space-y-8">
+            {experience.map((job, index) => (
+              <div key={index} 
+                   className="bg-gray-900 border border-green-500 rounded-lg p-6
+                            transform transition-all duration-300 hover:border-green-400">
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h3 className="text-xl font-semibold text-green-400">{job.company}</h3>
+                    <p className="text-green-300">{job.role}</p>
+                  </div>
+                  <span className="text-gray-500">{job.period}</span>
+                </div>
+                <p className="text-gray-400 mb-4">{job.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {job.technologies.map((tech, i) => (
+                    <span key={i} className="px-3 py-1 bg-green-900/30 border border-green-500 rounded-full text-sm">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex justify-center mt-16">
+          <button
+            onClick={handleButtonClick}
+            className="group flex items-center space-x-2 bg-green-500 hover:bg-green-400 text-black px-6 py-3 rounded-full transform transition-all duration-300 hover:scale-105"
+          >
+            <span>View All Projects</span>
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+// Add this to your global CSS file
+const styles = `
+@keyframes matrix {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+.matrix-animation {
+  background: linear-gradient(0deg, rgba(32, 194, 14, 0.1) 25%, transparent);
+  background-size: 100% 400%;
+  animation: matrix 20s linear infinite;
+}
+
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text-alt, .glitch-text-alt2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
+
+.glitch-text-alt {
+  animation: glitch 0.4s cubic-bezier(.25, .46, .45, .94) both infinite;
+  color: #0ff;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+}
+
+.glitch-text-alt2 {
+  animation: glitch 0.4s cubic-bezier(.25, .46, .45, .94) reverse both infinite;
+  color: #f0f;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+`;
