@@ -29,7 +29,7 @@ const CircuitLoader = () => {
         </div>
       </div>
       <div className="absolute mt-32 font-mono text-green-500">
-        INITIALIZING SYSTEM...
+        INITIALIZING PROJECTS...
       </div>
     </div>
   );
