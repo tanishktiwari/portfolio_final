@@ -96,12 +96,20 @@ const MatrixLoader = ({ isLoading }) => {
   );
 };
 
-
 export default function Home() {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);  // Set it to true initially
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [activeCard, setActiveCard] = useState(null);
+
+  useEffect(() => {
+    // Simulate loading for 2 seconds after the component mounts
+    const loadingTimeout = setTimeout(() => {
+      setIsLoading(false);  // Set loading to false after 2 seconds
+    }, 2000); 
+
+    return () => clearTimeout(loadingTimeout);  // Clear timeout on component unmount
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -158,7 +166,10 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-white">
+    <div
+      className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-white"
+      style={{ cursor: 'none' }}  // Hides the default cursor
+    >
       <MatrixLoader isLoading={isLoading} />
 
       {fireParticles.map((particle, index) => (
@@ -209,7 +220,7 @@ export default function Home() {
           mass: 0.1,
         }}
       />
-
+      
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="space-y-20">
           <div className="space-y-8 text-center sm:text-left">
@@ -355,7 +366,7 @@ export default function Home() {
             transition={{ delay: 0.6 }}
             className="flex justify-center sm:justify-start items-center gap-6"
           >
-            {[
+            {[ 
               { icon: Github, href: 'https://github.com/yourusername' },
               { icon: Linkedin, href: 'https://linkedin.com/in/yourusername' },
               { icon: Mail, href: 'mailto:your.email@example.com' }
