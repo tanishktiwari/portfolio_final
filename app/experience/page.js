@@ -6,9 +6,9 @@ import { Github, ExternalLink, Terminal, Shield, Cpu, ArrowRight, Loader2 } from
 
 const ButtonLoader = () => (
   <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center">
-    <div className="text-green-500 flex flex-col items-center">
-      <Loader2 className="w-12 h-12 animate-spin" />
-      <p className="mt-4 font-mono">Processing Request...</p>
+    <div className="text-green-500 flex flex-col items-center px-4 text-center">
+      <Loader2 className="w-8 h-8 sm:w-12 sm:h-12 animate-spin" />
+      <p className="mt-4 font-mono text-sm sm:text-base">Processing Request...</p>
     </div>
   </div>
 );
@@ -60,17 +60,17 @@ const HackerLoader = () => {
   }, [progress]);
 
   return (
-    <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
-      <div className="text-green-500 font-mono w-80">
-        <Terminal className="w-12 h-12 mb-4 mx-auto animate-pulse" />
-        <div className="mb-4">{status}</div>
+    <div className="fixed inset-0 bg-black z-50 flex items-center justify-center p-4">
+      <div className="text-green-500 font-mono w-full max-w-xs sm:w-80">
+        <Terminal className="w-8 h-8 sm:w-12 sm:h-12 mb-4 mx-auto animate-pulse" />
+        <div className="mb-4 text-sm sm:text-base">{status}</div>
         <div className="h-2 bg-gray-800 rounded">
           <div 
             className="h-full bg-green-500 rounded transition-all duration-100"
             style={{ width: `${progress}%` }}
           />
         </div>
-        <div className="mt-2 text-right">{progress}%</div>
+        <div className="mt-2 text-right text-sm sm:text-base">{progress}%</div>
       </div>
     </div>
   );
@@ -88,7 +88,6 @@ export default function Projects() {
   const handleButtonClick = async (e) => {
     e.preventDefault();
     setButtonLoading(true);
-    // Simulate loading for 1 second before navigation
     await new Promise(resolve => setTimeout(resolve, 1000));
     window.location.href = '/projects';
   };
@@ -138,29 +137,29 @@ export default function Projects() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-green-500 font-mono pt-16">
+    <div className="min-h-screen bg-black text-green-500 font-mono pt-8 sm:pt-16">
       {loading && <HackerLoader />}
       {buttonLoading && <ButtonLoader />}
       <MatrixBackground />
       
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
-        <div className="flex items-center mb-12">
-          <Shield className="w-8 h-8 mr-4 animate-pulse" />
-          <GlitchText className="text-4xl font-bold">MERN PROJECTS</GlitchText>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-20 relative">
+        <div className="flex items-center mb-8 sm:mb-12">
+          <Shield className="w-6 h-6 sm:w-8 sm:h-8 mr-3 sm:mr-4 animate-pulse" />
+          <GlitchText className="text-2xl sm:text-3xl md:text-4xl font-bold">MERN PROJECTS</GlitchText>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-12 sm:mb-20">
           {projects.map((project, index) => (
             <div key={index} 
                  className="bg-gray-900 border border-green-500 rounded-lg overflow-hidden 
                           transform transition-all duration-300 hover:scale-105 hover:border-green-400
                           hover:shadow-lg hover:shadow-green-500/50">
-              <div className="p-6">
-                <h2 className="text-xl font-semibold mb-2 text-green-400">{project.title}</h2>
-                <p className="text-gray-400 mb-4">{project.description}</p>
+              <div className="p-4 sm:p-6">
+                <h2 className="text-lg sm:text-xl font-semibold mb-2 text-green-400">{project.title}</h2>
+                <p className="text-gray-400 mb-4 text-sm sm:text-base">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech, i) => (
-                    <span key={i} className="px-3 py-1 bg-green-900/30 border border-green-500 rounded-full text-sm">
+                    <span key={i} className="px-2 sm:px-3 py-1 bg-green-900/30 border border-green-500 rounded-full text-xs sm:text-sm">
                       {tech}
                     </span>
                   ))}
@@ -168,25 +167,25 @@ export default function Projects() {
                 <div className="flex space-x-4">
                   <Link
                     href={project.github}
-                    className="flex items-center text-green-400 hover:text-green-300 transition-colors"
+                    className="flex items-center text-green-400 hover:text-green-300 transition-colors text-sm sm:text-base"
                     onClick={(e) => {
                       e.preventDefault();
                       setButtonLoading(true);
                       setTimeout(() => setButtonLoading(false), 1000);
                     }}
                   >
-                    <Github className="w-5 h-5 mr-1" /> Source
+                    <Github className="w-4 h-4 sm:w-5 sm:h-5 mr-1" /> Source
                   </Link>
                   <Link
                     href={project.demo}
-                    className="flex items-center text-green-400 hover:text-green-300 transition-colors"
+                    className="flex items-center text-green-400 hover:text-green-300 transition-colors text-sm sm:text-base"
                     onClick={(e) => {
                       e.preventDefault();
                       setButtonLoading(true);
                       setTimeout(() => setButtonLoading(false), 1000);
                     }}
                   >
-                    <ExternalLink className="w-5 h-5 mr-1" /> Demo
+                    <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 mr-1" /> Demo
                   </Link>
                 </div>
               </div>
@@ -194,27 +193,27 @@ export default function Projects() {
           ))}
         </div>
 
-        <div className="mb-12">
-          <div className="flex items-center mb-8">
-            <Cpu className="w-8 h-8 mr-4 animate-pulse" />
-            <GlitchText className="text-3xl font-bold">WORK EXPERIENCE</GlitchText>
+        <div className="mb-8 sm:mb-12">
+          <div className="flex items-center mb-6 sm:mb-8">
+            <Cpu className="w-6 h-6 sm:w-8 sm:h-8 mr-3 sm:mr-4 animate-pulse" />
+            <GlitchText className="text-xl sm:text-2xl md:text-3xl font-bold">WORK EXPERIENCE</GlitchText>
           </div>
-          <div className="space-y-8">
+          <div className="space-y-4 sm:space-y-8">
             {experience.map((job, index) => (
               <div key={index} 
-                   className="bg-gray-900 border border-green-500 rounded-lg p-6
+                   className="bg-gray-900 border border-green-500 rounded-lg p-4 sm:p-6
                             transform transition-all duration-300 hover:border-green-400">
-                <div className="flex justify-between items-start mb-4">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4">
                   <div>
-                    <h3 className="text-xl font-semibold text-green-400">{job.company}</h3>
-                    <p className="text-green-300">{job.role}</p>
+                    <h3 className="text-lg sm:text-xl font-semibold text-green-400">{job.company}</h3>
+                    <p className="text-green-300 text-sm sm:text-base">{job.role}</p>
                   </div>
-                  <span className="text-gray-500">{job.period}</span>
+                  <span className="text-gray-500 text-sm sm:text-base mt-2 sm:mt-0">{job.period}</span>
                 </div>
-                <p className="text-gray-400 mb-4">{job.description}</p>
+                <p className="text-gray-400 mb-4 text-sm sm:text-base">{job.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {job.technologies.map((tech, i) => (
-                    <span key={i} className="px-3 py-1 bg-green-900/30 border border-green-500 rounded-full text-sm">
+                    <span key={i} className="px-2 sm:px-3 py-1 bg-green-900/30 border border-green-500 rounded-full text-xs sm:text-sm">
                       {tech}
                     </span>
                   ))}
@@ -224,13 +223,13 @@ export default function Projects() {
           </div>
         </div>
 
-        <div className="flex justify-center mt-16">
+        <div className="flex justify-center mt-8 sm:mt-16">
           <button
             onClick={handleButtonClick}
-            className="group flex items-center space-x-2 bg-green-500 hover:bg-green-400 text-black px-6 py-3 rounded-full transform transition-all duration-300 hover:scale-105"
+            className="group flex items-center space-x-2 bg-green-500 hover:bg-green-400 text-black px-4 sm:px-6 py-2 sm:py-3 rounded-full transform transition-all duration-300 hover:scale-105 text-sm sm:text-base"
           >
             <span>View All Projects</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
       </section>
@@ -238,8 +237,7 @@ export default function Projects() {
   );
 }
 
-// Add this to your global CSS file
-const styles = `
+export const styles = `
 @keyframes matrix {
   0% { background-position: 0% 0%; }
   100% { background-position: 0% 100%; }

@@ -21,9 +21,9 @@ const MatrixLoader = ({ isLoading }) => {
     const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
     const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const nums = '0123456789';
-    const symbols = '{}[]()$#@%&*';
-
-    const alphabet = katakana + latin + nums + symbols;
+    const hackSymbols = '{}[]()<>$#@%&*!?/\\|+=~^';
+    
+    const alphabet = katakana + latin + nums + hackSymbols;
 
     const fontSize = 16;
     const columns = canvas.width / fontSize;
@@ -35,7 +35,7 @@ const MatrixLoader = ({ isLoading }) => {
       context.fillRect(0, 0, canvas.width, canvas.height);
 
       context.fillStyle = '#0F0';
-      context.font = fontSize + 'px monospace';
+      context.font = fontSize + 'px "Fira Code", monospace';
 
       for (let i = 0; i < rainDrops.length; i++) {
         const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
@@ -68,10 +68,7 @@ const MatrixLoader = ({ isLoading }) => {
   return (
     <div className="fixed inset-0 z-50">
       <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" />
-      <canvas
-        ref={canvasRef}
-        className="relative z-10"
-      />
+      <canvas ref={canvasRef} className="relative z-10" />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -88,7 +85,7 @@ const MatrixLoader = ({ isLoading }) => {
             animate={{ opacity: [1, 0.5, 1] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           >
-            SYSTEM LOADING...
+            INITIALIZING_SYSTEM_ACCESS...
           </motion.p>
         </motion.div>
       </motion.div>
@@ -96,19 +93,123 @@ const MatrixLoader = ({ isLoading }) => {
   );
 };
 
+const CustomCursor = ({ mousePosition }) => {
+  return (
+    <>
+      {/* Primary high-tech cursor */}
+      <motion.div
+        className="fixed pointer-events-none z-50"
+        animate={{ x: mousePosition.x, y: mousePosition.y }}
+        transition={{ type: "tween", duration: 0.1 }}
+      >
+        {/* Hexagonal targeting frame */}
+        <div className="absolute -translate-x-1/2 -translate-y-1/2">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" className="animate-[spin_4s_linear_infinite]">
+            <path d="M20 2L35 11V29L20 38L5 29V11L20 2Z" stroke="#00ff00" strokeWidth="0.5" strokeOpacity="0.5"/>
+            <path d="M20 6L31 12.5V27.5L20 34L9 27.5V12.5L20 6Z" stroke="#00ff00" strokeWidth="0.5" strokeOpacity="0.3"/>
+          </svg>
+        </div>
+
+        {/* Dynamic scan lines */}
+        <div className="absolute w-20 h-20 -translate-x-1/2 -translate-y-1/2">
+          {/* Horizontal scan line */}
+          <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-500 to-transparent transform -translate-y-1/2 animate-[scanline_2s_ease-in-out_infinite]" />
+          {/* Vertical scan line */}
+          <div className="absolute left-1/2 top-0 h-full w-px bg-gradient-to-b from-transparent via-green-500 to-transparent transform -translate-x-1/2 animate-[scanline_2s_ease-in-out_infinite]" />
+        </div>
+
+        {/* Targeting elements */}
+        <div className="absolute -translate-x-1/2 -translate-y-1/2">
+          {/* Corner brackets */}
+          <div className="absolute left-0 top-0 w-3 h-3 border-l-2 border-t-2 border-green-500 opacity-80" />
+          <div className="absolute right-0 top-0 w-3 h-3 border-r-2 border-t-2 border-green-500 opacity-80 translate-x-[20px] -translate-y-[3px]" />
+          <div className="absolute left-0 bottom-0 w-3 h-3 border-l-2 border-b-2 border-green-500 opacity-80 -translate-x-[3px] translate-y-[20px]" />
+          <div className="absolute right-0 bottom-0 w-3 h-3 border-r-2 border-b-2 border-green-500 opacity-80 translate-x-[20px] translate-y-[20px]" />
+        </div>
+
+        {/* Central targeting system */}
+        <div className="absolute -translate-x-1/2 -translate-y-1/2">
+          {/* Precision dot */}
+          <div className="absolute w-1.5 h-1.5 bg-green-500 rounded-full left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-50" />
+          </div>
+          
+          {/* Technical rings */}
+          <div className="absolute w-8 h-8 border border-green-500/30 rounded-full left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-[spin_3s_linear_infinite]">
+            <div className="absolute top-1/2 left-0 w-1 h-1 bg-green-500 rounded-full" />
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Data stream effect */}
+      {[...Array(3)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="fixed pointer-events-none z-40"
+          animate={{ 
+            x: mousePosition.x, 
+            y: mousePosition.y,
+          }}
+          transition={{ 
+            type: "tween", 
+            duration: 0.1 + (i * 0.05),
+          }}
+        >
+          <div className="absolute -translate-x-1/2 -translate-y-1/2">
+            <div 
+              className="w-1 h-1 bg-green-500/40 rounded-full"
+              style={{
+                filter: `blur(${i * 0.5}px)`,
+                opacity: 1 - (i * 0.2)
+              }}
+            />
+          </div>
+        </motion.div>
+      ))}
+
+      {/* Analysis radius */}
+      <motion.div
+        className="fixed pointer-events-none z-30"
+        animate={{ 
+          x: mousePosition.x, 
+          y: mousePosition.y,
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.1, 0.2]
+        }}
+        transition={{ 
+          duration: 1.5,
+          repeat: Infinity,
+          repeatType: "reverse"
+        }}
+      >
+        <div className="absolute w-32 h-32 border border-green-500/20 rounded-full -translate-x-1/2 -translate-y-1/2">
+          <div className="absolute inset-0 border-t-2 border-green-500/20 rounded-full animate-spin" style={{ animationDuration: '3s' }} />
+        </div>
+      </motion.div>
+
+      <style jsx global>{`
+        @keyframes scanline {
+          0%, 100% { opacity: 0; }
+          50% { opacity: 1; }
+        }
+      `}</style>
+    </>
+  );
+};
+
 export default function Home() {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);  // Set it to true initially
+  const [isLoading, setIsLoading] = useState(true);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [activeCard, setActiveCard] = useState(null);
+  const [glitchText, setGlitchText] = useState(false);
 
   useEffect(() => {
-    // Simulate loading for 2 seconds after the component mounts
     const loadingTimeout = setTimeout(() => {
-      setIsLoading(false);  // Set loading to false after 2 seconds
-    }, 2000); 
+      setIsLoading(false);
+    }, 2000);
 
-    return () => clearTimeout(loadingTimeout);  // Clear timeout on component unmount
+    return () => clearTimeout(loadingTimeout);
   }, []);
 
   useEffect(() => {
@@ -123,39 +224,32 @@ export default function Home() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const fireParticles = Array.from({ length: 6 }).map((_, i) => ({
-    size: 12 - i * 2,
-    delay: i * 0.01,
-    opacity: 1 - (i * 0.15),
-    blur: i * 2
-  }));
-
   const techStack = [
     {
       icon: Code,
       title: 'Frontend',
       skills: ['React', 'Next.js', 'Tailwind'],
-      color: 'from-orange-400 to-red-500'
+      color: 'from-green-400 to-emerald-500'
     },
     {
       icon: Terminal,
       title: 'Backend',
       skills: ['Node.js', 'Express', 'MongoDB'],
-      color: 'from-red-500 to-pink-500'
+      color: 'from-emerald-500 to-green-500'
     },
     {
       icon: Globe,
       title: 'Other',
       skills: ['Git', 'AWS', 'Docker'],
-      color: 'from-pink-500 to-purple-500'
+      color: 'from-green-500 to-teal-500'
     }
   ];
 
   const stats = [
-    { label: 'Projects Completed', value: '20+', color: 'from-orange-400 to-red-400' },
-    { label: 'Years Experience', value: '3+', color: 'from-red-400 to-pink-400' },
-    { label: 'Technologies', value: '15+', color: 'from-pink-400 to-purple-400' },
-    { label: 'Satisfied Clients', value: '25+', color: 'from-purple-400 to-orange-400' }
+    { label: 'Projects Completed', value: '20+', color: 'from-green-400 to-emerald-400' },
+    { label: 'Years Experience', value: '3+', color: 'from-emerald-400 to-teal-400' },
+    { label: 'Technologies', value: '15+', color: 'from-teal-400 to-green-400' },
+    { label: 'Satisfied Clients', value: '25+', color: 'from-green-400 to-emerald-400' }
   ];
 
   const handleNavigation = (path) => {
@@ -166,61 +260,10 @@ export default function Home() {
   };
 
   return (
-    <div
-      className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-white"
-      style={{ cursor: 'none' }}  // Hides the default cursor
-    >
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 text-green-500 font-mono" style={{ cursor: 'none' }}>
       <MatrixLoader isLoading={isLoading} />
+      <CustomCursor mousePosition={mousePosition} />
 
-      {fireParticles.map((particle, index) => (
-        <motion.div
-          key={index}
-          className="fixed rounded-full pointer-events-none mix-blend-screen z-50 backdrop-blur-sm"
-          style={{
-            width: particle.size,
-            height: particle.size,
-            filter: `blur(${particle.blur}px)`,
-            background: `radial-gradient(circle at center, 
-              rgba(255,160,0,${particle.opacity}) 0%,
-              rgba(255,100,0,${particle.opacity * 0.8}) 50%,
-              rgba(255,50,0,${particle.opacity * 0.6}) 100%)`
-          }}
-          animate={{
-            x: mousePosition.x - (particle.size / 2),
-            y: mousePosition.y - (particle.size / 2),
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 1200 - index * 30,
-            damping: 15 - index * 1,
-            mass: 0.2,
-            delay: particle.delay,
-          }}
-        />
-      ))}
-
-      <motion.div
-        className="fixed pointer-events-none z-40"
-        style={{
-          width: 40,
-          height: 40,
-          filter: 'blur(15px)',
-          background: 'radial-gradient(circle at center, rgba(255,150,0,0.4) 0%, rgba(255,100,0,0.2) 50%, transparent 100%)',
-        }}
-        animate={{
-          x: mousePosition.x - 20,
-          y: mousePosition.y - 20,
-          scale: [1, 1.05, 1],
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 1000,
-          damping: 15,
-          mass: 0.1,
-        }}
-      />
-      
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="space-y-20">
           <div className="space-y-8 text-center sm:text-left">
@@ -232,16 +275,28 @@ export default function Home() {
             >
               <motion.span
                 whileHover={{ scale: 1.05 }}
-                className="inline-block px-3 py-1 bg-orange-500/10 text-orange-400 rounded-full text-sm font-medium backdrop-blur-sm hover:bg-orange-500/20 transition-colors cursor-pointer"
+                className="inline-block px-3 py-1 bg-green-500/10 text-green-400 rounded-full text-sm font-medium backdrop-blur-sm hover:bg-green-500/20 transition-colors cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   Full Stack Developer
-                  <Sparkles className="w-4 h-4" />
+                  <Terminal className="w-4 h-4" />
                 </span>
               </motion.span>
-              <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-orange-400">
-                Tanishk Tiwari
-              </h1>
+              <motion.h1 
+                className="text-4xl md:text-6xl font-bold glitch-text"
+                onMouseEnter={() => setGlitchText(true)}
+                onMouseLeave={() => setGlitchText(false)}
+              >
+                <span className={`relative ${glitchText ? 'animate-glitch' : ''}`}>
+                  Tanishk Tiwari
+                  {glitchText && (
+                    <>
+                      <span className="absolute top-0 left-0 -translate-x-1 translate-y-1 text-red-500 opacity-50">Tanishk Tiwari</span>
+                      <span className="absolute top-0 left-0 translate-x-1 -translate-y-1 text-blue-500 opacity-50">Tanishk Tiwari</span>
+                    </>
+                  )}
+                </span>
+              </motion.h1>
             </motion.div>
 
             <motion.p
@@ -386,6 +441,19 @@ export default function Home() {
           </motion.div>
         </div>
       </div>
+            <style jsx global>{`
+        @keyframes glitch {
+          0% { transform: translate(0) }
+          20% { transform: translate(-2px, 2px) }
+          40% { transform: translate(-2px, -2px) }
+          60% { transform: translate(2px, 2px) }
+          80% { transform: translate(2px, -2px) }
+          100% { transform: translate(0) }
+        }
+        .animate-glitch {
+          animation: glitch 500ms infinite;
+        }
+      `}</style>
     </div>
   );
 }
