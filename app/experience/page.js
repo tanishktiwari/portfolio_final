@@ -122,18 +122,27 @@ export default function Projects() {
   const experience = [
     {
       company: "Foxnet Securitas Private Limited",
-      role: "Senior MERN Stack Developer",
-      period: "2022 - Present",
+      role: "ReactJS Developer",
+      period: "2024 - Present",
       description: "Leading development of enterprise applications using MERN stack. Implementing microservices architecture and real-time features. Mentoring junior developers and establishing best practices.",
-      technologies: ["MongoDB", "Express.js", "React", "Node.js", "AWS", "Docker"]
+      technologies: ["MongoDB", "Express.js", "React", "Node.js", "AWS"]
     },
     {
-      company: "e2e Research",
-      role: "Full Stack Developer",
-      period: "2020 - 2022",
-      description: "Developed scalable web applications using MERN stack. Implemented CI/CD pipelines and automated testing. Collaborated with cross-functional teams to deliver high-quality solutions.",
-      technologies: ["MERN Stack", "Redux", "Jest", "Jenkins", "TypeScript"]
-    }
+  company: "PBM Associates/Co-daftar",
+  role: "Freelance Web Developer",
+  period: "2024 - Present",
+  description: "Developed and designed a dynamic, responsive website for a co-working space, utilizing modern frontend technologies like ReactJS. Worked closely with the client to understand their vision and ensure the website met their needs. Implemented interactive features, optimized performance, and ensured seamless user experience across devices.",
+  technologies: ["ReactJS", "CSS", "HTML", "JavaScript", "TailwindCSS", "NextJS"]
+},
+    {
+  company: "E2E Research",
+  role: "Survey Programmer",
+  period: "2021 - 2024",
+  description: "Collaborated with cross-functional teams to deliver high-quality solutions. Enhanced survey functionality and user experience through custom JavaScript and jQuery solutions. Managed and fulfilled data requests from clients with efficiency and accuracy.",
+  technologies: ["JavaScript", "CSS", "HTML", "JQuery"]
+}
+
+
   ];
 
   return (
@@ -143,7 +152,7 @@ export default function Projects() {
       <MatrixBackground />
       
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-20 relative">
-        <div className="flex items-center mb-8 sm:mb-12">
+        {/* <div className="flex items-center mb-8 sm:mb-12">
           <Shield className="w-6 h-6 sm:w-8 sm:h-8 mr-3 sm:mr-4 animate-pulse" />
           <GlitchText className="text-2xl sm:text-3xl md:text-4xl font-bold">MERN PROJECTS</GlitchText>
         </div>
@@ -191,7 +200,7 @@ export default function Projects() {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
 
         <div className="mb-8 sm:mb-12">
           <div className="flex items-center mb-6 sm:mb-8">

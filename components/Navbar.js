@@ -32,8 +32,8 @@ export default function Navbar() {
   const navigationLinks = [
     { path: '/', label: 'Terminal', icon: Terminal },
     { path: '/about', label: 'Identity', icon: Shield },
-    { path: '/experience', label: 'Exploits', icon: Code },
-    { path: '/projects', label: 'Systems', icon: Cpu },
+    { path: '/experience', label: 'Evolution', icon: Code },
+    { path: '/projects', label: 'Exploits', icon: Cpu },
     { path: '/contact', label: 'Network', icon: Radio }
   ];
 

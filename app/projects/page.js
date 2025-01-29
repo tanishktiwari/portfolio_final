@@ -75,23 +75,39 @@ export default function Projects() {
       image: "./deskAssure.jpg",
     },
     {
-      title: "Social Network App",
-      description:
-        "Feature-rich social platform with real-time messaging and content sharing",
-      tech: ["React", "Socket.io", "Node.js", "Redis"],
-      github: "#",
-      demo: "#",
-      image: "/api/placeholder/400/300",
-    },
+  title: "CardEase",
+  description: "Efficient ID card number retrieval system with a user-friendly interface, reducing operational costs and improving productivity.",
+  tech: ["React", "JavaScript", "JQuery", "TailwindCSS", "HTML"],
+  github: "#",
+  demo: "#",
+  image: "./under.avif",
+}
+,
     {
-      title: "Project Management Tool",
-      description:
-        "Collaborative project management system with real-time updates",
-      tech: ["React", "GraphQL", "Node.js", "MongoDB"],
-      github: "#",
-      demo: "#",
-      image: "/api/placeholder/400/300",
-    },
+  title: "DeskAssure",
+  description: "A web app for managing support tickets with role-based access control and real-time updates, enhancing user experience.",
+  tech: ["React", "JavaScript", "JQuery", "TailwindCSS", "HTML"],
+  github: "#",
+  demo: "#",
+  image: "./main.jpg",
+},
+{
+  title: "Co-Working Space Website",
+  description: "Developed a dynamic, responsive website for a co-working space, featuring interactive elements and seamless user experience.",
+  tech: ["React", "JavaScript", "JQuery", "TailwindCSS", "HTML", "Node.js", "Express"],
+  github: "#",
+  demo: "#",
+  image: "./under.avif",
+},
+{
+  title: "Career Panel",
+  description: "A full-stack career page with job listings, application forms, and an admin panel for managing job posts, designed using the MERN stack and TailwindCSS.",
+  tech: ["React", "Node.js", "Express", "MongoDB", "TailwindCSS"],
+  github: "#",
+  demo: "#",
+  image: "./jobs.jpg",
+}
+
   ];
 
   return (

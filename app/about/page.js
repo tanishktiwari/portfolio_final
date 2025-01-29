@@ -92,11 +92,12 @@ export default function About() {
           <div className="font-mono order-1 lg:order-2">
             <div className="mb-6 bg-gray-900 p-3 sm:p-4 rounded-lg border border-green-500">
               <p className="text-base sm:text-lg mb-2">{'>>'} npm start career.js</p>
-              <p className="text-sm sm:text-base md:text-lg">
-                Passionate MERN stack developer exploring the endless possibilities of web development.
-                Currently diving deep into modern web technologies while building scalable applications.
-                Learning and growing every day, because in tech, being a student never ends.
-              </p>
+<p className="text-sm sm:text-base md:text-lg">
+  Passionate ReactJS developer exploring the endless possibilities of building dynamic and responsive web applications. 
+  Currently deepening my expertise in ReactJS while leveraging the power of the MERN stack to build full-stack solutions. 
+  Constantly learning and evolving, because in tech, the journey of learning never stops.
+</p>
+
             </div>
 
             <h2 className="text-xl sm:text-2xl font-semibold mb-4 flex items-center gap-2">

@@ -240,16 +240,16 @@ export default function Home() {
     {
       icon: Globe,
       title: 'Other',
-      skills: ['Git', 'AWS', 'Docker'],
+      skills: ['Git', 'AWS'],
       color: 'from-green-500 to-teal-500'
     }
   ];
 
   const stats = [
-    { label: 'Projects Completed', value: '20+', color: 'from-green-400 to-emerald-400' },
-    { label: 'Years Experience', value: '3+', color: 'from-emerald-400 to-teal-400' },
-    { label: 'Technologies', value: '15+', color: 'from-teal-400 to-green-400' },
-    { label: 'Satisfied Clients', value: '25+', color: 'from-green-400 to-emerald-400' }
+    { label: 'Projects Completed', value: '3+', color: 'from-green-400 to-emerald-400' },
+    { label: 'Years Experience', value: '1+', color: 'from-emerald-400 to-teal-400' },
+    { label: 'Technologies', value: '5+', color: 'from-teal-400 to-green-400' },
+    { label: 'Satisfied Clients', value: '5+', color: 'from-green-400 to-emerald-400' }
   ];
 
   const handleNavigation = (path) => {
@@ -422,9 +422,9 @@ export default function Home() {
             className="flex justify-center sm:justify-start items-center gap-6"
           >
             {[ 
-              { icon: Github, href: 'https://github.com/yourusername' },
-              { icon: Linkedin, href: 'https://linkedin.com/in/yourusername' },
-              { icon: Mail, href: 'mailto:your.email@example.com' }
+              { icon: Github, href: 'https://github.com/tanishktiwari' },
+              { icon: Linkedin, href: 'https://www.linkedin.com/in/tanishktiwari/' },
+              { icon: Mail, href: 'mailto:tanishktiwari12@gmail.com' }
             ].map((social, index) => (
               <motion.a
                 key={index}
